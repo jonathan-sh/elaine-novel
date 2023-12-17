@@ -1,4 +1,4 @@
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8" />
@@ -18,32 +18,100 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        img{
-            max-width: 50%;
+        img {
+            max-width: 30%;
         }
 
-        .left{
+        .left {
             float: left;
             left: 0;
         }
 
-        .right{
+        .right {
             float: right;
             right: 0;
         }
 
+        video{
+            width: 100%;
+        }
     </style>
 
 </head>
 
 <body>
     <h1>MAIN</h1>
+
+    <div>
+        <input type="date" id="idDateInput">
+    </div>
     <img class="left" src="left.png" alt="left">
     <img class="right" src="right.png" alt="right">
+    <div id="videoContainer">
+       
+    </div>
+    <script>
+        var epSource = {
+            "352": 193,
+            "353": 194,
+            "354": 195,
+            "355": 196,
+            "356": 197,
+            "357": 198,
+            "359": 199,
+            "360": 200,
+            "361": 201,
+            "362": 202,
+            "363": 203,
+            "364": 204,
+            "346": 188,
+            "347": 189,
+            "348": 190,
+            "349": 191,
+            "350": 192,
+            "1": 205,
+            "2": 206,
+            "4": 207,
+            "5": 208,
+            "6": 209,
+            "7": 210,
+            "8": 211,
+            "9": 212,
+            "11": 213,
+            "12": 214,
+            "13": 215,
+            "14": 216,
+            "15": 217,
+            "16": 218,
+            "18": 219,
+            "19": 220,
+            "20": 221
+        };
+
+        function getDayOfYearUTC(input) {
+            var data = new Date(input)
+            var start = new Date(data.getUTCFullYear(), 0, 0);
+            var diff = (data - start) + ((start.getTimezoneOffset() - data.getTimezoneOffset()) * 60 * 1000);
+            var diaDoAno = Math.floor(diff / (1000 * 60 * 60 * 24));
+            return diaDoAno;
+        };
+
+        function dateSelectionChange() {
+            var selectedDate = document.getElementById("idDateInput").value;
+            var dayOfYear = getDayOfYearUTC(selectedDate);
+            var ep = epSource[dayOfYear];
+            var link = `https://01.nflixcdn.me/NOV/TEP/TEPzJ8ZbkUekz24eeeVxdBUi${ep}.mp4`
+            var videoContainer = document.getElementById("videoContainer");
+            var video = ` <video id="videoPlay" controls><source src="${link}" type="video/mp4"></video>`;
+            videoContainer.innerHTML = video;
+        }
+
+
+        document
+            .getElementById("idDateInput")
+            .addEventListener("change", dateSelectionChange);
+    </script>
+
 </body>
-
-<script>
-
-</script>
 
 </html>
