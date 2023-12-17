@@ -19,7 +19,7 @@
         }
 
         img {
-            max-width: 30%;
+            max-width: 40%;
         }
 
         .left {
@@ -32,7 +32,9 @@
             right: 0;
         }
 
-        video{
+        .date {}
+
+        video {
             width: 100%;
         }
     </style>
@@ -40,15 +42,15 @@
 </head>
 
 <body>
-    <h1>MAIN</h1>
-
-    <div>
-        <input type="date" id="idDateInput">
+    <h1>NETFLIX DA ELAINE</h1>
+    <h2>Escolha o dia:</h2>
+    <div class="date">
+        <input style="font-size: 20px" type="date" id="idDateInput">
     </div>
     <img class="left" src="left.png" alt="left">
     <img class="right" src="right.png" alt="right">
     <div id="videoContainer">
-       
+
     </div>
     <script>
         var epSource = {
@@ -100,12 +102,16 @@
             var selectedDate = document.getElementById("idDateInput").value;
             var dayOfYear = getDayOfYearUTC(selectedDate);
             var ep = epSource[dayOfYear];
-            var link = `https://01.nflixcdn.me/NOV/TEP/TEPzJ8ZbkUekz24eeeVxdBUi${ep}.mp4`
             var videoContainer = document.getElementById("videoContainer");
-            var video = ` <video id="videoPlay" controls><source src="${link}" type="video/mp4"></video>`;
-            videoContainer.innerHTML = video;
-        }
+            if (ep == undefined) {
+                videoContainer.innerHTML = "<h2>Capítulo não encontrado 😕</h2><h3>Mãe, só tem capítulos lançados depois do dia 13/12/2023.</h3>";
+            } else {
+                var link = `https://01.nflixcdn.me/NOV/TEP/TEPzJ8ZbkUekz24eeeVxdBUi${ep}.mp4`
+                var video = `<h2>Agora é só assistir 😘: </h2> <video id="videoPlay" controls><source src="${link}" type="video/mp4"></video>`;
+                videoContainer.innerHTML = video;
+            }
 
+        };
 
         document
             .getElementById("idDateInput")
