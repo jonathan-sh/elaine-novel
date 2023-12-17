@@ -16,19 +16,30 @@
                 sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-        }       
+        }
+
+        img{
+            max-width: 50%;
+        }
+
+        .left{
+            float: left;
+            left: 0;
+        }
+
+        .right{
+            float: right;
+            right: 0;
+        }
+
     </style>
 
 </head>
 
 <body>
-    <div>
-        <h1>MAIN</h1>
-    </div>
-    <div>
-        <img src="left.png" alt="left">
-        <img src="right.png" alt="right">
-    </div>
+    <h1>MAIN</h1>
+    <img class="left" src="left.png" alt="left">
+    <img class="right" src="right.png" alt="right">
 </body>
 
 <script>
